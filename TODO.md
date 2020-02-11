@@ -3,7 +3,7 @@
 [x] TODO.md
 [X] README.md
 [x] basic express app
-[ ] docker
+[x] docker
 [ ] env files
 [ ] nodemon
 [ ] linting

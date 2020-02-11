@@ -9,9 +9,7 @@
 [x] linting
 [x] mocha testing framework
 [ ] npm scripts 
-[ ]   start
-[ ]   start:dev
-[ ]   start:prod
+[x]   start, start:dev, start:prod
 [ ]   test
 [ ]   lint
 [ ]   debug:start

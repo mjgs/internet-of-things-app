@@ -10,8 +10,8 @@
 [x] mocha testing framework
 [ ] npm scripts 
 [x]   start, start:dev, start:prod
+[x]   lint
 [ ]   test
-[ ]   lint
 [ ]   debug:start
 [ ]   debug:start:dev
 [ ]   debug:start:prod

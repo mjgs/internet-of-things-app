@@ -6,7 +6,8 @@
   "scripts": {
     "start": "if [ \"$NODE_ENV\" = 'production' ]; then npm run start:prod; else npm run start:dev; fi",
     "start:dev": ". ./.env.dev; nodemon ./bin/www",
-    "start:prod": ". ./.env.prod; node ./bin/www"
+    "start:prod": ". ./.env.prod; node ./bin/www",
+    "lint": "eslint --ignore-path .gitignore ."
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

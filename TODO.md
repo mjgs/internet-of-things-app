@@ -6,7 +6,7 @@
 [x] docker
 [x] env files
 [x] nodemon
-[ ] linting
+[x] linting
 [ ] npm scripts 
 [ ]   start
 [ ]   start:dev

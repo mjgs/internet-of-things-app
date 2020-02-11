@@ -9,16 +9,12 @@
 [x] linting
 [x] mocha testing framework
 [x] refactor basic express app
-[ ] minimal integration test
-[ ] minimal unit test (utils, middleware, controller)
+[x] minimal integration test
+[x] minimal unit test (utils, middleware, controller)
 [ ] npm scripts 
 [x]   start, start:dev, start:prod
 [x]   lint
-[ ]   test
-[ ]   debug:start
-[ ]   debug:start:dev
-[ ]   debug:start:prod
-[ ]   debug:test
+[x]   test, debug:start, debug:start:dev, debug:start:prod, debug:test
 [ ] git hooks
 [ ] nyc code coverage
 

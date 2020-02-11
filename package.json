@@ -7,7 +7,19 @@
     "start": "if [ \"$NODE_ENV\" = 'production' ]; then npm run start:prod; else npm run start:dev; fi",
     "start:dev": ". ./.env.dev; nodemon ./bin/www",
     "start:prod": ". ./.env.prod; node ./bin/www",
-    "lint": "eslint --ignore-path .gitignore ."
+    "lint": "eslint --ignore-path .gitignore .",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "npm run test:unit:controllers && npm run test:unit:middleware && npm run test:unit:utils",
+    "test:unit:controllers": ". .env.test; ./node_modules/.bin/mocha test/unit/controllers.test.js 2> /dev/null",
+    "test:unit:middleware": ". .env.test; ./node_modules/.bin/mocha test/unit/middleware.test.js 2> /dev/null",
+    "test:unit:utils": ". .env.test; ./node_modules/.bin/mocha test/unit/utils.test.js 2> /dev/null",
+    "test:integration": ". .env.test; ./node_modules/.bin/mocha --recursive -R spec test/integration/*.test.js test/integration/**/*.test.js 2> /dev/null",
+    "debug:start": "if [ \"$NODE_ENV\" = 'production' ]; then npm run debug:start:prod; else npm run debug:start:dev; fi",
+    "debug:start:dev": ". ./.env.dev; nodemon --nolazy --inspect-brk=$DEBUG_PORT ./bin/www",
+    "debug:start:prod": ". ./.env.prod; node --nolazy --inspect-brk=$DEBUG_PORT ./bin/www",
+    "debug:test:unit:controllers": ". .env.test; ./node_modules/.bin/mocha --nolazy --inspect-brk=$DEBUG_PORT test/unit/controllers.test.js 2> /dev/null",
+    "debug:test:unit:middleware": ". .env.test; ./node_modules/.bin/mocha --nolazy --inspect-brk=$DEBUG_PORT test/unit/middleware.test.js 2> /dev/null",
+    "debug:test:unit:utils": ". .env.test; ./node_modules/.bin/mocha --nolazy --inspect-brk=$DEBUG_PORT test/unit/utils.test.js 2> /dev/null"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

@@ -1,7 +1,7 @@
 [ ] 1. Setup basic environment
 [x] git
 [x] TODO.md
-[ ] README.md
+[X] README.md
 [ ] basic express app
 [ ] docker
 [ ] env files

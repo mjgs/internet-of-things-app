@@ -5,7 +5,7 @@
 [x] basic express app
 [x] docker
 [x] env files
-[ ] nodemon
+[x] nodemon
 [ ] linting
 [ ] npm scripts 
 [ ]   start

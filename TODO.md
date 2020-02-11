@@ -4,7 +4,7 @@
 [X] README.md
 [x] basic express app
 [x] docker
-[ ] env files
+[x] env files
 [ ] nodemon
 [ ] linting
 [ ] npm scripts 

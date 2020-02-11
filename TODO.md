@@ -2,7 +2,7 @@
 [x] git
 [x] TODO.md
 [X] README.md
-[ ] basic express app
+[x] basic express app
 [ ] docker
 [ ] env files
 [ ] nodemon

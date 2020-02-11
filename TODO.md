@@ -8,6 +8,9 @@
 [x] nodemon
 [x] linting
 [x] mocha testing framework
+[x] refactor basic express app
+[ ] minimal integration test
+[ ] minimal unit test (utils, middleware, controller)
 [ ] npm scripts 
 [x]   start, start:dev, start:prod
 [x]   lint
@@ -17,8 +20,6 @@
 [ ]   debug:start:prod
 [ ]   debug:test
 [ ] git hooks
-[ ] minimal integration test
-[ ] minimal unit test (utils, middleware, controller)
 [ ] nyc code coverage
 
 [ ] 2. Write test suite stubs

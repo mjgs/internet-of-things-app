@@ -7,6 +7,7 @@
 [x] env files
 [x] nodemon
 [x] linting
+[x] mocha testing framework
 [ ] npm scripts 
 [ ]   start
 [ ]   start:dev
@@ -18,7 +19,6 @@
 [ ]   debug:start:prod
 [ ]   debug:test
 [ ] git hooks
-[ ] mocha testing framework
 [ ] minimal integration test
 [ ] minimal unit test (utils, middleware, controller)
 [ ] nyc code coverage

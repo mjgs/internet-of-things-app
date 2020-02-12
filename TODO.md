@@ -16,7 +16,7 @@
 [x]   lint
 [x]   test, debug:start, debug:start:dev, debug:start:prod, debug:test
 [x] git hooks
-[ ] nyc code coverage
+[x] nyc code coverage
 
 [ ] 2. Write test suite stubs
 [ ] integration

@@ -11,7 +11,7 @@
 [x]   refactor basic express app
 [x]   minimal integration test
 [x]   minimal unit test (utils, middleware, controller)
-[ ]   npm scripts 
+[x]   npm scripts 
 [x]     start, start:dev, start:prod
 [x]     lint
 [x]     test, debug:start, debug:start:dev, debug:start:prod, debug:test

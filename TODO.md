@@ -1,4 +1,4 @@
-[ ] 1. Setup basic environment
+[x] 1. Setup basic environment
 [x] git
 [x] TODO.md
 [X] README.md

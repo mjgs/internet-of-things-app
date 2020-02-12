@@ -1,0 +1,58 @@
+{
+  "name": "drones-app",
+  "version": "0.0.1",
+  "description": "System to track the real-time location of individual drones in a fleet",
+  "private": true,
+  "scripts": {
+    "start": "if [ \"$NODE_ENV\" = 'production' ]; then npm run start:prod; else npm run start:dev; fi",
+    "start:dev": ". ./.env.dev; nodemon ./bin/www",
+    "start:prod": ". ./.env.prod; node ./bin/www",
+    "lint": "eslint --ignore-path .gitignore .",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "npm run test:unit:controllers && npm run test:unit:middleware && npm run test:unit:utils",
+    "test:unit:controllers": ". .env.test; ./node_modules/.bin/mocha test/unit/controllers.test.js 2> /dev/null",
+    "test:unit:middleware": ". .env.test; ./node_modules/.bin/mocha test/unit/middleware.test.js 2> /dev/null",
+    "test:unit:utils": ". .env.test; ./node_modules/.bin/mocha test/unit/utils.test.js 2> /dev/null",
+    "test:integration": ". .env.test; ./node_modules/.bin/mocha --recursive -R spec test/integration/*.test.js test/integration/**/*.test.js 2> /dev/null",
+    "debug:start": "if [ \"$NODE_ENV\" = 'production' ]; then npm run debug:start:prod; else npm run debug:start:dev; fi",
+    "debug:start:dev": ". ./.env.dev; nodemon --nolazy --inspect-brk=$DEBUG_PORT ./bin/www",
+    "debug:start:prod": ". ./.env.prod; node --nolazy --inspect-brk=$DEBUG_PORT ./bin/www",
+    "debug:test:unit:controllers": ". .env.test; ./node_modules/.bin/mocha --nolazy --inspect-brk=$DEBUG_PORT test/unit/controllers.test.js 2> /dev/null",
+    "debug:test:unit:middleware": ". .env.test; ./node_modules/.bin/mocha --nolazy --inspect-brk=$DEBUG_PORT test/unit/middleware.test.js 2> /dev/null",
+    "debug:test:unit:utils": ". .env.test; ./node_modules/.bin/mocha --nolazy --inspect-brk=$DEBUG_PORT test/unit/utils.test.js 2> /dev/null",
+    "debug:test:integration": ". .env.test; ./node_modules/.bin/mocha --nolazy --inspect-brk=$DEBUG_PORT --recursive -R spec test/integration/*.test.js test/integration/**/*.test.js 2> /dev/null",
+    "coverage": "nyc --reporter=lcov --reporter=text-summary npm run test"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "^2.6.9",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chance": "^1.1.4",
+    "cheerio": "^1.0.0-rc.3",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "ghooks": "^2.0.4",
+    "mocha": "^7.0.1",
+    "nodemon": "^2.0.2",
+    "nyc": "^14.1.1",
+    "proxyquire": "^2.1.3",
+    "sinon": "^8.1.1",
+    "supertest": "^4.0.2"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "opt --in pre-commit --exec 'npm run lint'",
+      "pre-push": "opt --in pre-push --exec 'npm run test'"
+    }
+  }
+}

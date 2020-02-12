@@ -1,5 +1,6 @@
 /* eslint-env mocha */
 /* eslint-disable no-unused-expressions */
+const debug = require('debug')('test:unit:controllers'); // eslint-disable-line no-unused-vars
 
 const expect = require('chai').expect;
 const sinon = require('sinon');

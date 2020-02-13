@@ -44,7 +44,7 @@ it('should load the 404 error page in production mode', function(done) {
 
 it('should load the dashboard page', function(done) {
   request(app)
-    .get('/dashboard')
+    .get('/')
     .expect('Content-Type', 'text/html; charset=utf-8')
     .expect(200)
     .end(function(err, res) {

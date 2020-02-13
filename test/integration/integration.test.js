@@ -13,37 +13,6 @@ describe('#integration', function() {
     return done();
   });
 
-  it('should load the homepage', function(done) {
-    request(app)
-      .get('/')
-      .expect('Content-Type', 'text/html; charset=utf-8')
-      .expect(200)
-      .end(function(err, res) {
-        if (err) {
-          return done(err);
-        }
-        const $ = cheerio.load(res.text);
-        expect($('h1')[0].children[0].data).to.equal('Express');
-        expect($('p')[0].children[0].data).to.equal('Welcome to Express');
-        return done();
-      });
-  });
-
-  it('should load the users page', function(done) {
-    request(app)
-      .get('/users')
-      .expect('Content-Type', 'text/html; charset=utf-8')
-      .expect(200)
-      .end(function(err, res) {
-        if (err) {
-          return done(err);
-        }
-        const $ = cheerio.load(res.text);
-        expect($('body')[0].children[0].data).to.equal('respond with a resource');
-        return done();
-      });
-  });
-
   it('should load the 404 error page in development mode', function(done) {
     app.set('env', 'development');
     request(app)

@@ -7,55 +7,53 @@ const cheerio = require('cheerio');
 
 const app = require('../../lib/app');
 
-describe('#integration', function() {
-  it('should test that the integration test suite is setup', function(done) {
-    expect(true).to.be.true; // eslint-disable-line no-unused-expressions
-    return done();
-  });
+it('should test that the integration test suite is setup', function(done) {
+  expect(true).to.be.true; // eslint-disable-line no-unused-expressions
+  return done();
+});
 
-  it('should load the 404 error page in development mode', function(done) {
-    app.set('env', 'development');
-    request(app)
-      .get('/pagedoesnotexist')
-      .expect('Content-Type', 'text/html; charset=utf-8')
-      .expect(404)
-      .end(function(err, res) {
-        if (err) {
-          return done(err);
-        }
-        app.set('env', 'development');
-        return done();
-      });
-  });
+it('should load the 404 error page in development mode', function(done) {
+  app.set('env', 'development');
+  request(app)
+    .get('/pagedoesnotexist')
+    .expect('Content-Type', 'text/html; charset=utf-8')
+    .expect(404)
+    .end(function(err, res) {
+      if (err) {
+        return done(err);
+      }
+      app.set('env', 'development');
+      return done();
+    });
+});
 
-  it('should load the 404 error page in production mode', function(done) {
-    app.set('env', 'production');
-    request(app)
-      .get('/pagedoesnotexist')
-      .expect('Content-Type', 'text/html; charset=utf-8')
-      .expect(404)
-      .end(function(err, res) {
-        if (err) {
-          return done(err);
-        }
-        app.set('env', 'development');
-        return done();
-      });
-  });
+it('should load the 404 error page in production mode', function(done) {
+  app.set('env', 'production');
+  request(app)
+    .get('/pagedoesnotexist')
+    .expect('Content-Type', 'text/html; charset=utf-8')
+    .expect(404)
+    .end(function(err, res) {
+      if (err) {
+        return done(err);
+      }
+      app.set('env', 'development');
+      return done();
+    });
+});
 
-  it('should load the dashboard page', function(done) {
-    request(app)
-      .get('/dashboard')
-      .expect('Content-Type', 'text/html; charset=utf-8')
-      .expect(200)
-      .end(function(err, res) {
-        if (err) {
-          return done(err);
-        }
-        const $ = cheerio.load(res.text);
-        expect($('h1')[0].children[0].data).to.equal('Dashboard');
-        expect($('p')[0].children[0].data).to.equal('Welcome to Dashboard');
-        return done();
-      });
-  });
+it('should load the dashboard page', function(done) {
+  request(app)
+    .get('/dashboard')
+    .expect('Content-Type', 'text/html; charset=utf-8')
+    .expect(200)
+    .end(function(err, res) {
+      if (err) {
+        return done(err);
+      }
+      const $ = cheerio.load(res.text);
+      expect($('h1')[0].children[0].data).to.equal('Dashboard');
+      expect($('p')[0].children[0].data).to.equal('Welcome to Dashboard');
+      return done();
+    });
 });

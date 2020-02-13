@@ -85,7 +85,7 @@ describe('#integration', function() {
         }
         const $ = cheerio.load(res.text);
         expect($('h1')[0].children[0].data).to.equal('Dashboard');
-        expect($('p')[0].children[0].data).to.equal('Welcome to the Dashboard');
+        expect($('p')[0].children[0].data).to.equal('Welcome to Dashboard');
         return done();
       });
   });

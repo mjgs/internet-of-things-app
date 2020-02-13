@@ -45,4 +45,21 @@ describe('#controllers', function() {
     expect(res.send.calledWith('respond with a resource')).to.be.true;
     expect(next.notCalled).to.be.true;
   });
+
+  it('should render the dashboard', function() {
+    // setup
+    const req = {};
+    const res = {
+      render: sinon.stub()
+    };
+    const next = sinon.stub();
+
+    // run
+    controllers.dashboard(req, res, next);
+
+    // test
+    expect(res.render.calledOnce).to.be.true;
+    expect(res.render.calledWith('index', { title: 'Dashboard' })).to.be.true;
+    expect(next.notCalled).to.be.true;
+  });
 });

@@ -73,4 +73,20 @@ describe('#integration', function() {
         return done();
       });
   });
+
+  it('should load the dashboard page', function(done) {
+    request(app)
+      .get('/dashboard')
+      .expect('Content-Type', 'text/html; charset=utf-8')
+      .expect(200)
+      .end(function(err, res) {
+        if (err) {
+          return done(err);
+        }
+        const $ = cheerio.load(res.text);
+        expect($('h1')[0].children[0].data).to.equal('Dashboard');
+        expect($('p')[0].children[0].data).to.equal('Welcome to the Dashboard');
+        return done();
+      });
+  });
 });

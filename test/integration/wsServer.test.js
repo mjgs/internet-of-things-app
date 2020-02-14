@@ -3,19 +3,19 @@ const debug = require('debug')('test:integration:wsServer'); // eslint-disable-l
 
 const expect = require('chai').expect;
 const http = require('http');
+const WebSocket = require('ws');
 
 const app = require('../../lib/app');
 const config = require('../../lib/config');
-const wsServer = require('../../lib/utils/wsServer');
+const createWebsocketsServer = require('../../lib/utils/createWebsocketsServer');
 
 describe('#wsServer', function() {
-  let server;
+  let httpServer, wsClient, wsServer, websocketsServerUrl;
 
   before(function(done) {
-    server = http.createServer(app);
-    wsServer(server);
-
-    server.listen(config.server.port, function(err) {
+    httpServer = http.createServer(app);
+    wsServer = createWebsocketsServer(httpServer);
+    httpServer.listen(config.server.port, function(err) {
       if (err) {
         return done(err);
       }
@@ -24,24 +24,43 @@ describe('#wsServer', function() {
     });
   });
 
+  beforeEach(function(done) {
+    websocketsServerUrl = `ws://localhost:${config.server.port}/`;
+    wsClient = new WebSocket(websocketsServerUrl);
+    return done();
+  });
+
   after(function(done) {
-    if (server) {
-      server.on('close', function() {
-        debug('Closed wsServer');
+    debug('Closing wsServer...');
+    wsServer.close(function(err) {
+      if (err) {
+        return done(err);
+      }
+      debug('wsServer closed');
+      debug('Closing httpServer...');
+      httpServer.close(function(err) {
+        if (err) {
+          return done(err);
+        }
+        debug('httpServer closed');
         return done();
       });
-      server.close(function() {
-        debug('Initiated close of wsServer...');
-        server.unref();
-      });
-    }
-    else {
-      return done(new Error('Problem closing the wsServer'));
-    }
+    });
   });
 
   it('should test that the wsServer integration test suite is setup', function(done) {
     expect(true).to.be.true; // eslint-disable-line no-unused-expressions
     return done();
+  });
+
+  it('should respond to server PING with client PONG', function(done) {
+    wsClient.on('open', function() {
+      debug(`wsClient connected to server: ${websocketsServerUrl}`);
+      wsClient.on('message', function(data) {
+        debug(`wsClient received message: ${data}`);
+        return done();
+      });
+      wsClient.send(`PING from client - ${new Date()}`);
+    });
   });
 });

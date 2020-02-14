@@ -24,6 +24,8 @@
 
 [ ] 3. Write the webserver using TDD
 [ ]   realtime communication API
+[x]     basic websockets server
+[ ]     basic drones websockets server
 [ ]   drone simulation / fake drones
 [ ]   website dashboard
 [ ]     drone unique identifiers

@@ -14,7 +14,7 @@
     "lint": "eslint --ignore-path .gitignore .",
     "test": "npm run test:unit && npm run test:integration",
     "test:unit": ". .env.test; echo 'Unit Tests:'; ./node_modules/.bin/mocha test/unit/**/*.test.js 2> /dev/null",
-    "test:integration": ". .env.test; echo 'Integration Tests:'; ./node_modules/.bin/mocha --recursive -R spec test/integration/*.test.js test/integration/**/*.test.js 2> /dev/null",
+    "test:integration": ". .env.test; echo 'Integration Tests:'; ./node_modules/.bin/mocha --recursive -R spec test/integration/*.test.js 2> /dev/null",
     "debug:start": "if [ \"$NODE_ENV\" = 'production' ]; then npm run debug:start:prod; else npm run debug:start:dev; fi",
     "debug:start:dev": ". ./.env.dev; nodemon --nolazy --inspect-brk=$DEBUG_PORT ./bin/www",
     "debug:start:prod": ". ./.env.prod; node --nolazy --inspect-brk=$DEBUG_PORT ./bin/www",

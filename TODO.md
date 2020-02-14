@@ -18,17 +18,19 @@
 [x]   git hooks
 [x]   nyc code coverage
 
-[ ] 2. Write test suite stubs
-[ ]   integration
-[ ]   unit
+[x] 2. Write test suite stubs
+[x]   integration
+[x]   unit
 
 [ ] 3. Write the webserver using TDD
+[ ]   realtime communication API
+[x]     basic websockets server
+[ ]     basic drones websockets server
+[ ]   drone simulation / fake drones
 [ ]   website dashboard
 [ ]     drone unique identifiers
 [ ]     non-active drones highlighted
 [ ]     current speed
-[ ]   realtime communication API
-[ ]   drone simulation / fake drones
 [ ]   documention
 [ ]     description
 [ ]     assumptions & system explanations

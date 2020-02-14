@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 
+const debug = require('debug')('bin:www'); // eslint-disable-line no-unused-vars
+
 /**
  * Module dependencies.
  */
 
 const app = require('../lib/app');
-const debug = require('debug')('drones-app:server');
+const utils = require('../lib/utils');
 const http = require('http');
 
 /**
@@ -20,6 +22,21 @@ app.set('port', port);
  */
 
 const server = http.createServer(app);
+const wsServer = utils.createWebsocketsServer(server);
+
+
+/**
+ * Setup SIGNAL handlers
+ */
+process.on('SIGTERM', function() {
+  debug(`Closing server following receipt of SIGTERM`);
+  server.close();
+});
+
+process.on('SIGINT', function() {
+  debug(`Closing server following receipt of SIGINT`);
+  server.close();
+});
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -28,6 +45,17 @@ const server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+server.on('close', function() {
+  debug('Closing wsServer...');
+  wsServer.close(function(err) {
+    if (err) {
+      return done(err);
+    }
+    debug('wsServer closed');
+    process.exitCode = 0;
+    debug(`server closed`);
+  });
+});
 
 /**
  * Normalize a port into a number, string, or false.

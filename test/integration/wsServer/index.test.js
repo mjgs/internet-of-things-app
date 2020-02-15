@@ -48,7 +48,7 @@ describe('wsServer: index', function() {
     });
   });
 
-  it('should respond to server PING with client PONG', function(done) {
+  it('should respond to client PING with server PONG', function(done) {
     wsClient.on('open', function() {
       debug(`wsClient connected to server: ${websocketsServerUrl}`);
       wsClient.on('message', function(data) {

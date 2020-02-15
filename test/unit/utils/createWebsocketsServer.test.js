@@ -5,30 +5,16 @@ const debug = require('debug')('test:unit:utils:createWebsocketsServer'); // esl
 const expect = require('chai').expect;
 const sinon = require('sinon');
 const proxyquire = require('proxyquire');
-const chance = new (require('chance'))();
 
 describe('utils.createWebsocketsServer', function() {
-  let createWebsocketsServer, debugStub, mockMessage, clientSocketMock, clientSocketOnStub;
-  let wsServerOnStub, WebSocketStub, clientSocketSendStub;
-
-  beforeEach(function() {
-    debugStub = sinon.stub();
+  it('should create a web sockets server', function() {
+    // setup
+    const debugStub = sinon.stub();
     const debugFake = sinon.fake(function(namespace) {
       return debugStub;
     });
-    mockMessage = chance.word();
-    clientSocketOnStub = sinon.spy(function(event, cb) {
-      return cb(mockMessage);
-    });
-    clientSocketSendStub = sinon.stub();
-    clientSocketMock = {
-      on: clientSocketOnStub,
-      send: clientSocketSendStub
-    };
-    wsServerOnStub = sinon.spy(function(event, cb) {
-      return cb(clientSocketMock);
-    });
-    WebSocketStub = {
+    const wsServerOnStub = sinon.stub();
+    const WebSocketStub = {
       Server: class WebSocket {
         constructor() {
           return {
@@ -41,11 +27,7 @@ describe('utils.createWebsocketsServer', function() {
       debug: debugFake,
       ws: WebSocketStub
     };
-    createWebsocketsServer = proxyquire('../../../lib/utils/createWebsocketsServer', stubs);
-  });
-
-  it('should create a web sockets server', function() {
-    // setup
+    const createWebsocketsServer = proxyquire('../../../lib/utils/createWebsocketsServer', stubs);
     const mockServer = {};
 
     // run
@@ -53,17 +35,21 @@ describe('utils.createWebsocketsServer', function() {
 
     // test
     expect(wss).to.be.an('object');
-    expect(wsServerOnStub.calledOnce).to.be.true;
-    expect(clientSocketOnStub.calledOnce).to.be.true;
-    expect(debugStub.calledTwice).to.be.true;
-    expect(debugStub.args[0][0]).to.be.equal(`wsServer received message: ${mockMessage}`);
-    expect(clientSocketSendStub.calledOnce).to.be.true;
-    expect(clientSocketSendStub.args[0][0]).to.have.string('PONG from server - ');
-    expect(debugStub.args[1][0]).to.have.string('wsServer sent message: PONG from server -');
+    expect(wss.on.calledOnce).to.be.true;
   });
 
   it('should throw a bad argument error', function(done) {
     // setup
+    const debugStub = sinon.stub();
+    const debugFake = sinon.fake(function(namespace) {
+      return debugStub;
+    });
+    const WebSocketStub = {};
+    const stubs = {
+      debug: debugFake,
+      ws: WebSocketStub
+    };
+    const createWebsocketsServer = proxyquire('../../../lib/utils/createWebsocketsServer', stubs);
     const mockServer = '';
 
     // run

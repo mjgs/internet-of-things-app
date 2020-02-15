@@ -37,7 +37,7 @@ describe('utils.createWebsocketsServer', function() {
     expect(wss).to.be.an('object');
     expect(WebSocketStub.Server.calledOnce).to.be.true;
     expect(WebSocketStub.Server.calledWith({ server: mockServer })).to.be.true;
-    expect(wsServerOnStub.calledTwice).to.be.true;
+    expect(wsServerOnStub.calledOnce).to.be.true;
   });
 
   it('should throw a bad argument error', function(done) {

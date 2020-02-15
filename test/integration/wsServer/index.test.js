@@ -57,6 +57,7 @@ describe('wsServer: index', function() {
         debug(`wsClient received message: ${data}`);
         expect(data).to.be.an('string');
         expect(data).to.have.string('PONG');
+        wsClient.close();
         return done();
       });
       wsClient.send(`PING from client - ${new Date()}`);
@@ -72,6 +73,7 @@ describe('wsServer: index', function() {
         debug(`wsClient received message: ${data}`);
         expect(data).to.be.an('string');
         expect(data).to.have.string(`Hello ${mockUuid}, message received!`);
+        wsClient.close();
         return done();
       });
       wsClient.send(`uuid:${mockUuid}:${data}`);
@@ -86,9 +88,32 @@ describe('wsServer: index', function() {
         debug(`wsClient received message: ${data}`);
         expect(data).to.be.an('string');
         expect(data).to.have.string(`Hello ${mockUuid}, message received!`);
+        wsClient.close();
         return done();
       });
       wsClient.send(`gui:${mockUuid}`);
+    });
+  });
+
+  it('should not respond to client message', function(done) {
+    wsClient.on('open', function() {
+      debug(`wsClient connected to server: ${websocketsServerUrl}`);
+      wsClient.on('message', function(data) {
+        return done(new Error('Message error!'));
+      });
+      wsClient.send(chance.word());
+      setTimeout(function() {
+        wsClient.close();
+        return done();
+      }, 1000);
+    });
+  });
+
+  it('should not respond to client message', function(done) {
+    wsClient.on('open', function() {
+      debug(`wsClient connected to server: ${websocketsServerUrl}`);
+      wsClient.close();
+      return done();
     });
   });
 });

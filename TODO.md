@@ -27,9 +27,9 @@
 [x]     basic websockets server
 [x]     basic websockets server for devices
 [ ]   website dashboard
-[ ]     device unique identifiers
-[ ]     non-active device highlighted
+[ ]     basic dashboard showing devices
 [ ]     current speed
+[ ]     non-active device highlighted
 [ ]   device simulation
 [ ]   documention
 [ ]     description

@@ -1,15 +1,15 @@
 /* eslint-env mocha */
-const debug = require('debug')('test:integration:wsServer'); // eslint-disable-line no-unused-vars
+const debug = require('debug')('test:integration:wsServer:index'); // eslint-disable-line no-unused-vars
 
 const expect = require('chai').expect;
 const http = require('http');
 const WebSocket = require('ws');
 
-const app = require('../../lib/app');
-const config = require('../../lib/config');
-const createWebsocketsServer = require('../../lib/utils/createWebsocketsServer');
+const app = require('../../../lib/app');
+const config = require('../../../lib/config');
+const createWebsocketsServer = require('../../../lib/utils/createWebsocketsServer');
 
-describe('#wsServer', function() {
+describe('wsServer: index', function() {
   let httpServer, wsClient, wsServer, websocketsServerUrl;
 
   before(function(done) {
@@ -48,16 +48,12 @@ describe('#wsServer', function() {
     });
   });
 
-  it('should test that the wsServer integration test suite is setup', function(done) {
-    expect(true).to.be.true; // eslint-disable-line no-unused-expressions
-    return done();
-  });
-
   it('should respond to server PING with client PONG', function(done) {
     wsClient.on('open', function() {
       debug(`wsClient connected to server: ${websocketsServerUrl}`);
       wsClient.on('message', function(data) {
         debug(`wsClient received message: ${data}`);
+        expect(data).to.be.an('string');
         return done();
       });
       wsClient.send(`PING from client - ${new Date()}`);

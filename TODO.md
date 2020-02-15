@@ -25,18 +25,18 @@
 [ ] 3. Write the webserver using TDD
 [ ]   realtime communication API
 [x]     basic websockets server
-[ ]     basic drones websockets server
-[ ]   drone simulation / fake drones
+[ ]     basic websockets server for devices
+[ ]   device simulation
 [ ]   website dashboard
-[ ]     drone unique identifiers
-[ ]     non-active drones highlighted
+[ ]     device unique identifiers
+[ ]     non-active device highlighted
 [ ]     current speed
 [ ]   documention
 [ ]     description
 [ ]     assumptions & system explanations
 [ ]     installation
 [ ]       server
-[ ]       drones
+[ ]       devices
 [ ]   unit tests
 [ ]   integration tests
 [ ]   100% code coverage

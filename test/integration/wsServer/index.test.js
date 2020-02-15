@@ -54,6 +54,7 @@ describe('wsServer: index', function() {
       wsClient.on('message', function(data) {
         debug(`wsClient received message: ${data}`);
         expect(data).to.be.an('string');
+        expect(data).to.have.string('PONG');
         return done();
       });
       wsClient.send(`PING from client - ${new Date()}`);

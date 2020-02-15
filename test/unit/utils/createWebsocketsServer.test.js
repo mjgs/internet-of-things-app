@@ -15,13 +15,13 @@ describe('utils.createWebsocketsServer', function() {
     });
     const wsServerOnStub = sinon.stub();
     const WebSocketStub = {
-      Server: class WebSocket {
+      Server: sinon.spy(class WebSocket {
         constructor() {
           return {
             on: wsServerOnStub
           };
         }
-      }
+      })
     };
     const stubs = {
       debug: debugFake,
@@ -35,7 +35,9 @@ describe('utils.createWebsocketsServer', function() {
 
     // test
     expect(wss).to.be.an('object');
-    expect(wss.on.calledOnce).to.be.true;
+    expect(WebSocketStub.Server.calledOnce).to.be.true;
+    expect(WebSocketStub.Server.calledWith({ server: mockServer })).to.be.true;
+    expect(wsServerOnStub.calledTwice).to.be.true;
   });
 
   it('should throw a bad argument error', function(done) {

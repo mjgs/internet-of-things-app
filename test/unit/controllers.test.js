@@ -61,7 +61,7 @@ describe('#controllers', function() {
       catch (err) {
       // test
         expect(err).to.be.an('error');
-        expect(err.message).to.equal('Bad argument: req parameter must be an object');
+        expect(err.message).to.equal('Bad argument: req must be an object');
         return done();
       }
     });
@@ -79,7 +79,7 @@ describe('#controllers', function() {
       catch (err) {
       // test
         expect(err).to.be.an('error');
-        expect(err.message).to.equal('Bad argument: res parameter must be an object');
+        expect(err.message).to.equal('Bad argument: res must be an object');
         return done();
       }
     });
@@ -97,7 +97,7 @@ describe('#controllers', function() {
       catch (err) {
       // test
         expect(err).to.be.an('error');
-        expect(err.message).to.equal('Bad argument: next parameter must be a function');
+        expect(err.message).to.equal('Bad argument: next must be a function');
         return done();
       }
     });

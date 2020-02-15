@@ -108,12 +108,4 @@ describe('wsServer: index', function() {
       }, 1000);
     });
   });
-
-  it('should not respond to client message', function(done) {
-    wsClient.on('open', function() {
-      debug(`wsClient connected to server: ${websocketsServerUrl}`);
-      wsClient.close();
-      return done();
-    });
-  });
 });

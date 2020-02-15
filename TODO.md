@@ -23,14 +23,14 @@
 [x]   unit
 
 [ ] 3. Write the webserver using TDD
-[ ]   realtime communication API
+[x]   realtime communication API
 [x]     basic websockets server
-[ ]     basic websockets server for devices
-[ ]   device simulation
+[x]     basic websockets server for devices
 [ ]   website dashboard
 [ ]     device unique identifiers
 [ ]     non-active device highlighted
 [ ]     current speed
+[ ]   device simulation
 [ ]   documention
 [ ]     description
 [ ]     assumptions & system explanations

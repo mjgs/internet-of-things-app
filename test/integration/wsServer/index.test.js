@@ -4,6 +4,8 @@ const debug = require('debug')('test:integration:wsServer:index'); // eslint-dis
 const expect = require('chai').expect;
 const http = require('http');
 const WebSocket = require('ws');
+const chance = new (require('chance'))();
+const uuidv4 = require('uuid/v4');
 
 const app = require('../../../lib/app');
 const config = require('../../../lib/config');
@@ -58,6 +60,21 @@ describe('wsServer: index', function() {
         return done();
       });
       wsClient.send(`PING from client - ${new Date()}`);
+    });
+  });
+
+  it('should respond to client data update with ack', function(done) {
+    const mockUuid = uuidv4();
+    const data = chance.word();
+    wsClient.on('open', function() {
+      debug(`wsClient connected to server: ${websocketsServerUrl}`);
+      wsClient.on('message', function(data) {
+        debug(`wsClient received message: ${data}`);
+        expect(data).to.be.an('string');
+        expect(data).to.have.string('Received!');
+        return done();
+      });
+      wsClient.send(`uuid:${mockUuid}:${data}`);
     });
   });
 });

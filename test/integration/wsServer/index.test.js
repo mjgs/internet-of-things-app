@@ -77,4 +77,18 @@ describe('wsServer: index', function() {
       wsClient.send(`uuid:${mockUuid}:${data}`);
     });
   });
+
+  it('should respond to client gui message with ack', function(done) {
+    const mockUuid = uuidv4();
+    wsClient.on('open', function() {
+      debug(`wsClient connected to server: ${websocketsServerUrl}`);
+      wsClient.on('message', function(data) {
+        debug(`wsClient received message: ${data}`);
+        expect(data).to.be.an('string');
+        expect(data).to.have.string(`Hello ${mockUuid}, message received!`);
+        return done();
+      });
+      wsClient.send(`gui:${mockUuid}`);
+    });
+  });
 });

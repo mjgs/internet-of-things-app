@@ -13,6 +13,7 @@ const cheerio = require('cheerio');
 const app = require('../../../lib/app');
 const config = require('../../../lib/config');
 const createWebsocketsServer = require('../../../lib/utils/createWebsocketsServer');
+const dataStore = require('../../../lib/utils/dataStore');
 
 describe('wsServer: index', function() {
   let httpServer, wsClient, wsServer, websocketsServerUrl;
@@ -45,6 +46,7 @@ describe('wsServer: index', function() {
           return done(err);
         }
         debug('httpServer closed');
+        dataStore.clearDataStore();
         return done();
       });
     });

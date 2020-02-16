@@ -14,7 +14,11 @@ describe('controllers.dashboard', function() {
     const debugFake = sinon.fake(function(namespace) {
       return debugStub;
     });
-    mockDataStore = {};
+    mockDataStore = {
+      getDataStore: function() {
+        return {};
+      }
+    };
     mockHighlightRow = sinon.stub();
     utilsStub = {
       getRequestInfo: sinon.stub()
@@ -43,7 +47,7 @@ describe('controllers.dashboard', function() {
     expect(mockRes.render.calledOnce).to.be.true;
     expect(mockRes.render.calledWith('index', {
       title: 'Dashboard',
-      data: mockDataStore,
+      data: mockDataStore.getDataStore(),
       highlightRow: mockHighlightRow
     })).to.be.true;
     expect(mockNext.notCalled).to.be.true;

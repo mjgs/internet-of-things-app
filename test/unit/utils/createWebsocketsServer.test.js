@@ -27,11 +27,11 @@ describe('utils.createWebsocketsServer', function() {
       debug: debugFake,
       ws: WebSocketStub
     };
-    const createWebsocketsServer = proxyquire('../../../lib/utils/createWebsocketsServer', stubs);
+    const createWebsocketsServerUtil = proxyquire('../../../lib/utils/createWebsocketsServer', stubs);
     const mockServer = {};
 
     // run
-    const wss = createWebsocketsServer(mockServer);
+    const wss = createWebsocketsServerUtil(mockServer);
 
     // test
     expect(wss).to.be.an('object');
@@ -51,12 +51,12 @@ describe('utils.createWebsocketsServer', function() {
       debug: debugFake,
       ws: WebSocketStub
     };
-    const createWebsocketsServer = proxyquire('../../../lib/utils/createWebsocketsServer', stubs);
+    const createWebsocketsServerUtil = proxyquire('../../../lib/utils/createWebsocketsServer', stubs);
     const mockServer = '';
 
     // run
     try {
-      createWebsocketsServer(mockServer);
+      createWebsocketsServerUtil(mockServer);
     }
     catch (err) {
     // test

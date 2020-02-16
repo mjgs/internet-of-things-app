@@ -27,9 +27,12 @@
 [x]     basic websockets server
 [x]     basic websockets server for devices
 [ ]   website dashboard
-[ ]     device unique identifiers
+[x]     basic dashboard showing devices
+[x]     highlightable table items
+[ ]     handle position data
+[ ]     calculate and display current speed
 [ ]     non-active device highlighted
-[ ]     current speed
+[ ]     setup new server for each wss intgration test
 [ ]   device simulation
 [ ]   documention
 [x]     description

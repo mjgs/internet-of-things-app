@@ -7,19 +7,23 @@ const sinon = require('sinon');
 const proxyquire = require('proxyquire');
 
 describe('controllers.dashboard', function() {
-  let dashboardController, debugStub, utilsStub;
+  let dashboardController, debugStub, mockHighlightRow, utilsStub, mockDataStore;
 
   beforeEach(function() {
     debugStub = sinon.stub();
     const debugFake = sinon.fake(function(namespace) {
       return debugStub;
     });
+    mockDataStore = {};
+    mockHighlightRow = sinon.stub();
     utilsStub = {
       getRequestInfo: sinon.stub()
     };
     const stubs = {
       debug: debugFake,
-      '../utils': utilsStub
+      '../utils': utilsStub,
+      '../utils/dataStore': mockDataStore,
+      '../utils/highlightRow': mockHighlightRow
     };
     dashboardController = proxyquire('../../../lib/controllers/dashboard', stubs);
   });
@@ -37,7 +41,11 @@ describe('controllers.dashboard', function() {
 
     // test
     expect(mockRes.render.calledOnce).to.be.true;
-    expect(mockRes.render.calledWith('index', { title: 'Dashboard' })).to.be.true;
+    expect(mockRes.render.calledWith('index', {
+      title: 'Dashboard',
+      data: mockDataStore,
+      highlightRow: mockHighlightRow
+    })).to.be.true;
     expect(mockNext.notCalled).to.be.true;
   });
 

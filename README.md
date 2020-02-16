@@ -39,33 +39,40 @@ With the application running, load in a webrowser:
 https://localhost:3000
 ```
 
-You should see an empty dashboard table.
+You should see an empty dashboard table. This is page 1.
 
-Open the browser devtools (alt-option-i), select the devtools console tab.
+Open another browser tab to the same address and load the page again. In this tab, open the browser devtools (alt-option-i), select the devtools console tab. This is page 2.
 
 Copy & paste the following code into the console and hit enter:
 
 ```
-const things = ['Rock', 'Paper', 'Scissor'];
 function uuidv4() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
     var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
     return v.toString(16);
   });
 }
+let lat = '50.1234';
+let long = '55.1234';
+const uuid = uuidv4();
 const socket = new WebSocket('ws://localhost:3000');
 socket.addEventListener('message', function (event) {
   console.log('Message from server ', event.data);
 });
 socket.addEventListener('open', function (event) {
-  socket.send(`uuid:${uuidv4()}:${things[Math.floor(Math.random()*things.length)]}`);
+  socket.send(`uuid:${uuid}:${lat}:${long}`);
 });
 ```
 
-Reload the dashboard page, and you should see an entry in the table.
-Every time you run the code snippet you will see an additional item added to the table.
+Reload the dashboard page on Page 1, and you should see an entry in the table. The code snippet connects to the websokcets server, sends an update with some data, that data is then stored on the server, and when you load the dashboard it is rendered into the page. The speed is zero because there has only been one data point so far.
 
-The code snippet connects to the websokcets server, sends an update with some data, that data is then stored on the server, and when you load the dashboard it is rendered into the page.
+To send another data point from the device run this code in Page 2 devtools console:
+
+```
+lat = '51.1234';
+long = '56.1234';
+socket.send(`uuid:${uuid}:${lat}:${long}`);
+```
 
 ## Debugging
 

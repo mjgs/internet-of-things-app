@@ -15,11 +15,15 @@ describe('utils.highlightRow', function() {
       return debugStub;
     });
     const mockDataStore = {
-      0: {
-        speed: 0
-      },
-      1: {
-        speed: 50
+      getDataStore: function() {
+        return {
+          0: {
+            speed: 0
+          },
+          1: {
+            speed: 50
+          }
+        };
       }
     };
     const stubs = {

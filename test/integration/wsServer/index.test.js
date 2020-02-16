@@ -17,7 +17,7 @@ const createWebsocketsServer = require('../../../lib/utils/createWebsocketsServe
 describe('wsServer: index', function() {
   let httpServer, wsClient, wsServer, websocketsServerUrl;
 
-  before(function(done) {
+  beforeEach(function(done) {
     httpServer = http.createServer(app);
     wsServer = createWebsocketsServer(httpServer);
     httpServer.listen(config.server.port, function(err) {
@@ -25,17 +25,14 @@ describe('wsServer: index', function() {
         return done(err);
       }
       debug(`wsServer listening on port: ${config.server.port}`);
+      websocketsServerUrl = `ws://localhost:${config.server.port}/`;
+      wsClient = new WebSocket(websocketsServerUrl);
+      debug(`created web sockets client connection to wss: ${websocketsServerUrl}`);
       return done();
     });
   });
 
-  beforeEach(function(done) {
-    websocketsServerUrl = `ws://localhost:${config.server.port}/`;
-    wsClient = new WebSocket(websocketsServerUrl);
-    return done();
-  });
-
-  after(function(done) {
+  afterEach(function(done) {
     debug('Closing wsServer...');
     wsServer.close(function(err) {
       if (err) {

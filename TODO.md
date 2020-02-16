@@ -32,6 +32,7 @@
 [ ]     handle position data
 [ ]     calculate and display current speed
 [ ]     non-active device highlighted
+[ ]     setup new server for each wss intgration test
 [ ]   device simulation
 [ ]   documention
 [ ]     description

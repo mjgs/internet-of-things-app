@@ -32,11 +32,11 @@
 [ ]     current speed
 [ ]   device simulation
 [ ]   documention
-[ ]     description
+[x]     description
 [ ]     assumptions & system explanations
-[ ]     installation
-[ ]       server
-[ ]       devices
+[x]     installation
+[x]     debugging
+[x]     testing
 [ ]   unit tests
 [ ]   integration tests
 [ ]   100% code coverage

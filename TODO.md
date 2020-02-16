@@ -27,8 +27,10 @@
 [x]     basic websockets server
 [x]     basic websockets server for devices
 [ ]   website dashboard
-[ ]     basic dashboard showing devices
-[ ]     current speed
+[x]     basic dashboard showing devices
+[ ]     highlightable table items
+[ ]     handle position data
+[ ]     calculate and display current speed
 [ ]     non-active device highlighted
 [ ]   device simulation
 [ ]   documention

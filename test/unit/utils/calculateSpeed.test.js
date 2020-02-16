@@ -20,20 +20,140 @@ describe('utils.calculateSpeed', function() {
     calculateSpeedUtil = proxyquire('../../../lib/utils/calculateSpeed', stubs);
   });
 
-  it('should return a number betwee 0 and 100', function() {
+  it('should return a positive number', function() {
     // setup
-    const mockReq = {};
-    const mockRes = {};
-    const mockNext = function() {};
+    const t2 = Date.now();
+    const t1 = t2 - (10 * 1000);
+    const lat1 = 50.1234;
+    const long1 = 55.1234;
+    const lat2 = 55.1234;
+    const long2 = 60.1234;
 
     // run
-    const speed = calculateSpeedUtil(mockReq, mockRes, mockNext);
+    const speed = calculateSpeedUtil(t1, lat1, long1, t2, lat2, long2);
 
     // test
     expect(speed).to.be.above(-1);
-    expect(speed).to.be.below(101);
     expect(debugStub.calledOnce).to.be.true;
     expect(debugStub.args[0][0]).has.string('speed:');
-    expect(debugStub.args[0][0]).has.string('km/h');
+    expect(debugStub.args[0][0]).has.string('meters/second');
+  });
+
+  it('should return null - bad t2', function() {
+    // setup
+    const t2 = -1;
+    const t1 = Date.now() - (10 * 1000);
+    const lat1 = '50.1234';
+    const long1 = '55.1234';
+    const lat2 = '55.1234';
+    const long2 = '60.1234';
+
+    // run
+    const speed = calculateSpeedUtil(t1, lat1, long1, t2, lat2, long2);
+
+    // test
+    expect(speed).to.be.null;
+    expect(debugStub.notCalled).to.be.true;
+  });
+
+  it('should return null - bad t1', function() {
+    // setup
+    const t2 = Date.now();
+    const t1 = -1;
+    const lat1 = '50.1234';
+    const long1 = '55.1234';
+    const lat2 = '55.1234';
+    const long2 = '60.1234';
+
+    // run
+    const speed = calculateSpeedUtil(t1, lat1, long1, t2, lat2, long2);
+
+    // test
+    expect(speed).to.be.null;
+    expect(debugStub.notCalled).to.be.true;
+  });
+
+  it('should return null - bad timestamps', function() {
+    // setup
+    const t2 = Date.now();
+    const t1 = Date.now() + (10 * 1000);
+    const lat1 = '50.1234';
+    const long1 = '55.1234';
+    const lat2 = '55.1234';
+    const long2 = 'qwerty';
+
+    // run
+    const speed = calculateSpeedUtil(t1, lat1, long1, t2, lat2, long2);
+
+    // test
+    expect(speed).to.be.null;
+    expect(debugStub.notCalled).to.be.true;
+  });
+
+  it('should return null - bad lat1', function() {
+    // setup
+    const t2 = Date.now();
+    const t1 = Date.now() - (10 * 1000);
+    const lat1 = 'qwerty';
+    const long1 = '55.1234';
+    const lat2 = '55.1234';
+    const long2 = '60.1234';
+
+    // run
+    const speed = calculateSpeedUtil(t1, lat1, long1, t2, lat2, long2);
+
+    // test
+    expect(speed).to.be.null;
+    expect(debugStub.notCalled).to.be.true;
+  });
+
+  it('should return null - bad long1', function() {
+    // setup
+    const t2 = Date.now();
+    const t1 = Date.now() - (10 * 1000);
+    const lat1 = '50.1234';
+    const long1 = 'qwerty';
+    const lat2 = '55.1234';
+    const long2 = '60.1234';
+
+    // run
+    const speed = calculateSpeedUtil(t1, lat1, long1, t2, lat2, long2);
+
+    // test
+    expect(speed).to.be.null;
+    expect(debugStub.notCalled).to.be.true;
+  });
+  it('should return null - bad lat2', function() {
+    // setup
+    const t2 = Date.now();
+    const t1 = Date.now() - (10 * 1000);
+    const lat1 = '50.1234';
+    const long1 = '55.1234';
+    const lat2 = 'qwerty';
+    const long2 = '60.1234';
+
+    // run
+    const speed = calculateSpeedUtil(t1, lat1, long1, t2, lat2, long2);
+
+    // test
+    expect(speed).to.be.null;
+    expect(debugStub.notCalled).to.be.true;
+  });
+
+  it('should return null - bad long2', function() {
+    // setup
+    const t2 = Date.now();
+    const t1 = Date.now() - (10 * 1000);
+    const lat1 = '50.1234';
+    const long1 = '55.1234';
+    const lat2 = '55.1234';
+    const long2 = 'qwerty';
+
+    // run
+    const speed = calculateSpeedUtil(t1, lat1, long1, t2, lat2, long2);
+
+    // test
+    expect(speed).to.be.null;
+    expect(debugStub.notCalled).to.be.true;
   });
 });

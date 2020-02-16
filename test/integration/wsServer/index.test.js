@@ -6,6 +6,9 @@ const http = require('http');
 const WebSocket = require('ws');
 const chance = new (require('chance'))();
 const uuidv4 = require('uuid/v4');
+const async = require('async');
+const request = require('request');
+const cheerio = require('cheerio');
 
 const app = require('../../../lib/app');
 const config = require('../../../lib/config');
@@ -106,6 +109,48 @@ describe('wsServer: index', function() {
         wsClient.close();
         return done();
       }, 1000);
+    });
+  });
+
+  it('should display client data on the dashboard page - server rendered', function(done) {
+    const mockUuid = uuidv4();
+    const data = chance.word();
+
+    async.series([
+      // Send data from client to server via websocket
+      function(callback) {
+        wsClient.on('open', function() {
+          debug(`wsClient connected to server: ${websocketsServerUrl}`);
+          wsClient.on('message', function(data) {
+            debug(`wsClient received message: ${data}`);
+            expect(data).to.be.an('string');
+            expect(data).to.have.string(`Hello ${mockUuid}, message received!`);
+            wsClient.close();
+            return callback();
+          });
+          wsClient.send(`uuid:${mockUuid}:${data}`);
+        });
+      },
+      // Load the dnashboard and check that data is in the page
+      function(callback) {
+        const options = {
+          url: `http://localhost:${config.server.port}`,
+          strictSSL: false
+        };
+        request(options, function(err, httpResponse, body) {
+          if (err) {
+            return callback(err);
+          }
+          const $ = cheerio.load(httpResponse.body);
+          expect($('.dataitem')[$('.dataitem').length - 1].children[0].data).to.equal(`${mockUuid}:${data}`);
+          return callback();
+        });
+      }
+    ], function(err) {
+      if (err) {
+        return done(err);
+      }
+      return done(err);
     });
   });
 });

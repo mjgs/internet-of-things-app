@@ -31,6 +31,42 @@ NODE_ENV=production npm start
 NODE_ENV=production npm run docker
 ```
 
+### Loading the dashboard and creating some fake devices
+
+With the application running, load in a webrowser:
+
+```
+https://localhost:3000
+```
+
+You should see an empty dashboard table.
+
+Open the browser devtools (alt-option-i), select the devtools console tab.
+
+Copy & paste the following code into the console and hit enter:
+
+```
+const things = ['Rock', 'Paper', 'Scissor'];
+function uuidv4() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+const socket = new WebSocket('ws://localhost:3000');
+socket.addEventListener('message', function (event) {
+  console.log('Message from server ', event.data);
+});
+socket.addEventListener('open', function (event) {
+  socket.send(`uuid:${uuidv4()}:${things[Math.floor(Math.random()*things.length)]}`);
+});
+```
+
+Reload the dashboard page, and you should see an entry in the table.
+Every time you run the code snippet you will see an additional item added to the table.
+
+The code snippet connects to the websokcets server, sends an update with some data, that data is then stored on the server, and when you load the dashboard it is rendered into the page.
+
 ## Debugging
 
 The app uses the [debug](https://github.com/visionmedia/debug) module, with debug namespace set to file path.

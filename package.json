@@ -4,6 +4,7 @@
   "description": "System to track the real-time location of individual drones in a fleet",
   "private": true,
   "scripts": {
+    "postinstall": "./bin/npm-scripts/install-bootstrap.sh",
     "start": "if [ \"$NODE_ENV\" = 'production' ]; then npm run start:prod; else npm run start:dev; fi",
     "start:dev": ". ./.env.dev; nodemon ./bin/www",
     "start:prod": ". ./.env.prod; node ./bin/www",

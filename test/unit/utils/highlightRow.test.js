@@ -14,24 +14,44 @@ describe('utils.highlightRow', function() {
     const debugFake = sinon.fake(function(namespace) {
       return debugStub;
     });
+    const mockDataStore = {
+      0: {
+        speed: 0
+      },
+      1: {
+        speed: 50
+      }
+    };
     const stubs = {
-      debug: debugFake
+      debug: debugFake,
+      './dataStore': mockDataStore
     };
     highlightRowUtil = proxyquire('../../../lib/utils/highlightRow', stubs);
   });
 
-  it('should return a boolean value', function() {
+  it('should return true for devices that are not moving', function() {
     // setup
-    const mockReq = {};
-    const mockRes = {};
-    const mockNext = function() {};
+    const socketIdMock = 0;
 
     // run
-    const highlightRow = highlightRowUtil(mockReq, mockRes, mockNext);
+    const highlightRow = highlightRowUtil(socketIdMock);
 
     // test
-    expect(highlightRow).to.be.an('boolean');
+    expect(highlightRow).to.be.true;
     expect(debugStub.calledOnce).to.be.true;
-    expect(debugStub.args[0][0]).to.be.equal(`highlightRow: ${highlightRow}`);
+    expect(debugStub.args[0][0]).to.be.equal('highlightRow: true');
+  });
+
+  it('should return false for devices that are moving', function() {
+    // setup
+    const socketIdMock = 1;
+
+    // run
+    const highlightRow = highlightRowUtil(socketIdMock);
+
+    // test
+    expect(highlightRow).to.be.false;
+    expect(debugStub.calledOnce).to.be.true;
+    expect(debugStub.args[0][0]).to.be.equal('highlightRow: false');
   });
 });

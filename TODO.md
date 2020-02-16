@@ -29,10 +29,10 @@
 [ ]   website dashboard
 [x]     basic dashboard showing devices
 [x]     highlightable table items
+[x]     setup new server for each wss intgration test
 [ ]     handle position data
 [ ]     calculate and display current speed
 [ ]     non-active device highlighted
-[ ]     setup new server for each wss intgration test
 [ ]   device simulation
 [ ]   documention
 [x]     description

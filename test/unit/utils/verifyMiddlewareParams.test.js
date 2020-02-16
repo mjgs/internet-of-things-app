@@ -7,7 +7,7 @@ const sinon = require('sinon');
 const proxyquire = require('proxyquire');
 
 describe('utils.verifyMiddlewareParams', function() {
-  let verifyMiddlewareParamsMiddleware, debugStub;
+  let verifyMiddlewareParamsUtil, debugStub;
 
   beforeEach(function() {
     debugStub = sinon.stub();
@@ -17,7 +17,7 @@ describe('utils.verifyMiddlewareParams', function() {
     const stubs = {
       debug: debugFake
     };
-    verifyMiddlewareParamsMiddleware = proxyquire('../../../lib/utils/verifyMiddlewareParams', stubs);
+    verifyMiddlewareParamsUtil = proxyquire('../../../lib/utils/verifyMiddlewareParams', stubs);
   });
 
   it('should verify supplied middleware arguments', function() {
@@ -27,7 +27,7 @@ describe('utils.verifyMiddlewareParams', function() {
     const mockNext = function() {};
 
     // run
-    verifyMiddlewareParamsMiddleware(mockReq, mockRes, mockNext);
+    verifyMiddlewareParamsUtil(mockReq, mockRes, mockNext);
 
     // test
     expect(debugStub.calledOnce).to.be.true;
@@ -42,7 +42,7 @@ describe('utils.verifyMiddlewareParams', function() {
 
     // run
     try {
-      verifyMiddlewareParamsMiddleware(mockReq, mockRes, mockNext);
+      verifyMiddlewareParamsUtil(mockReq, mockRes, mockNext);
     }
     catch (err) {
       // test
@@ -60,7 +60,7 @@ describe('utils.verifyMiddlewareParams', function() {
 
     // run
     try {
-      verifyMiddlewareParamsMiddleware(mockReq, mockRes, mockNext);
+      verifyMiddlewareParamsUtil(mockReq, mockRes, mockNext);
     }
     catch (err) {
       // test
@@ -78,7 +78,7 @@ describe('utils.verifyMiddlewareParams', function() {
 
     // run
     try {
-      verifyMiddlewareParamsMiddleware(mockReq, mockRes, mockNext);
+      verifyMiddlewareParamsUtil(mockReq, mockRes, mockNext);
     }
     catch (err) {
       // test

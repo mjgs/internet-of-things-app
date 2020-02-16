@@ -142,7 +142,9 @@ describe('wsServer: index', function() {
             return callback(err);
           }
           const $ = cheerio.load(httpResponse.body);
-          expect($('.dataitem')[$('.dataitem').length - 1].children[0].data).to.equal(`${mockUuid}:${data}`);
+          expect(parseInt($('.data-item-id')[$('.data-item-id').length - 1].children[0].data)).to.be.gte(0);
+          expect($('.data-item-uuid')[$('.data-item-uuid').length - 1].children[0].data).to.equal(`${mockUuid}`);
+          expect($('.data-item-data')[$('.data-item-data').length - 1].children[0].data).to.equal(`${data}`);
           return callback();
         });
       }

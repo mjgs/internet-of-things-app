@@ -31,8 +31,7 @@
 [x]     highlightable table items
 [x]     setup new server for each wss intgration test
 [x]     calculate and display speed
-[ ]     handle position data
-[ ]     non-active device highlighted
+[x]     non-active device highlighted
 [ ]   device simulation
 [ ]   documention
 [x]     description

@@ -98,7 +98,7 @@ describe('wsServer: index', function() {
     });
   });
 
-  it('should not respond to client message', function(done) {
+  it('should not respond to bad client message', function(done) {
     wsClient.on('open', function() {
       debug(`wsClient connected to server: ${websocketsServerUrl}`);
       wsClient.on('message', function(data) {
@@ -112,7 +112,21 @@ describe('wsServer: index', function() {
     });
   });
 
-  it('should display client data on the dashboard page - server rendered', function(done) {
+  it('should not respond to bad uuid client message', function(done) {
+    wsClient.on('open', function() {
+      debug(`wsClient connected to server: ${websocketsServerUrl}`);
+      wsClient.on('message', function(data) {
+        return done(new Error('Message error!'));
+      });
+      wsClient.send(`uuid:${chance.word()}:${chance.word()}:${chance.word()}`);
+      setTimeout(function() {
+        wsClient.close();
+        return done();
+      }, 1000);
+    });
+  });
+
+  it('should display client data on the dashboard page - server rendered, zero speed', function(done) {
     const mockUuid = uuidv4();
     const mockLat = '50.1234';
     const mockLong = '55.1234';
@@ -147,6 +161,64 @@ describe('wsServer: index', function() {
           expect($('.data-item-uuid')[$('.data-item-uuid').length - 1].children[0].data).to.equal(`${mockUuid}`);
           expect($('.data-item-lat')[$('.data-item-lat').length - 1].children[0].data).to.equal(`${mockLat}`);
           expect($('.data-item-long')[$('.data-item-long').length - 1].children[0].data).to.equal(`${mockLong}`);
+          expect(parseInt($('.data-item-speed')[$('.data-item-speed').length - 1].children[0].data)).to.equal(0);
+          return callback();
+        });
+      }
+    ], function(err) {
+      if (err) {
+        return done(err);
+      }
+      return done(err);
+    });
+  });
+
+  it('should display client data on the dashboard page - server rendered, non-zero speed', function(done) {
+    const mockUuid = uuidv4();
+    const mockLat1 = '50.1234';
+    const mockLong1 = '55.1234';
+    const mockLat2 = '50.1235';
+    const mockLong2 = '55.1235';
+
+    let ctr = 0;
+
+    async.series([
+      // Send 2 data packets from client to server via websocket
+      function(callback) {
+        wsClient.on('open', function() {
+          debug(`wsClient connected to server: ${websocketsServerUrl}`);
+          wsClient.on('message', function(data) {
+            debug(`wsClient received message: ${data}`);
+            expect(data).to.be.an('string');
+            if (ctr === 1) {
+              wsClient.close();
+              return callback();
+            }
+            ctr++;
+          });
+          wsClient.send(`uuid:${mockUuid}:${mockLat1}:${mockLong1}`);
+          // Wait 1 sec so the timestamps are different
+          setTimeout(function() {
+            wsClient.send(`uuid:${mockUuid}:${mockLat2}:${mockLong2}`);
+          }, 1000);
+        });
+      },
+      // Load the dashboard and check that data is in the page
+      function(callback) {
+        const options = {
+          url: `http://localhost:${config.server.port}`,
+          strictSSL: false
+        };
+        request(options, function(err, httpResponse, body) {
+          if (err) {
+            return callback(err);
+          }
+          const $ = cheerio.load(httpResponse.body);
+          expect(parseInt($('.data-item-id')[$('.data-item-id').length - 1].children[0].data)).to.be.gte(0);
+          expect($('.data-item-uuid')[$('.data-item-uuid').length - 1].children[0].data).to.equal(`${mockUuid}`);
+          expect($('.data-item-lat')[$('.data-item-lat').length - 1].children[0].data).to.equal(`${mockLat2}`);
+          expect($('.data-item-long')[$('.data-item-long').length - 1].children[0].data).to.equal(`${mockLong2}`);
+          expect(parseInt($('.data-item-speed')[$('.data-item-speed').length - 1].children[0].data)).to.be.gt(0);
           return callback();
         });
       }

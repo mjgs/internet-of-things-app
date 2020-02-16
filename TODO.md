@@ -40,6 +40,4 @@
 [x]     installation
 [x]     debugging
 [x]     testing
-[ ]   unit tests
-[ ]   integration tests
 [ ]   100% code coverage

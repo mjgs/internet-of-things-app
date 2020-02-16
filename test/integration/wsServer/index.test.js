@@ -68,7 +68,8 @@ describe('wsServer: index', function() {
 
   it('should respond to client data update with ack', function(done) {
     const mockUuid = uuidv4();
-    const data = chance.word();
+    const mockLat = '50.1234';
+    const mockLong = '55.1234';
     wsClient.on('open', function() {
       debug(`wsClient connected to server: ${websocketsServerUrl}`);
       wsClient.on('message', function(data) {
@@ -78,7 +79,7 @@ describe('wsServer: index', function() {
         wsClient.close();
         return done();
       });
-      wsClient.send(`uuid:${mockUuid}:${data}`);
+      wsClient.send(`uuid:${mockUuid}:${mockLat}:${mockLong}`);
     });
   });
 
@@ -113,7 +114,8 @@ describe('wsServer: index', function() {
 
   it('should display client data on the dashboard page - server rendered', function(done) {
     const mockUuid = uuidv4();
-    const data = chance.word();
+    const mockLat = '50.1234';
+    const mockLong = '55.1234';
 
     async.series([
       // Send data from client to server via websocket
@@ -127,10 +129,10 @@ describe('wsServer: index', function() {
             wsClient.close();
             return callback();
           });
-          wsClient.send(`uuid:${mockUuid}:${data}`);
+          wsClient.send(`uuid:${mockUuid}:${mockLat}:${mockLong}`);
         });
       },
-      // Load the dnashboard and check that data is in the page
+      // Load the dashboard and check that data is in the page
       function(callback) {
         const options = {
           url: `http://localhost:${config.server.port}`,
@@ -143,7 +145,8 @@ describe('wsServer: index', function() {
           const $ = cheerio.load(httpResponse.body);
           expect(parseInt($('.data-item-id')[$('.data-item-id').length - 1].children[0].data)).to.be.gte(0);
           expect($('.data-item-uuid')[$('.data-item-uuid').length - 1].children[0].data).to.equal(`${mockUuid}`);
-          expect($('.data-item-data')[$('.data-item-data').length - 1].children[0].data).to.equal(`${data}`);
+          expect($('.data-item-lat')[$('.data-item-lat').length - 1].children[0].data).to.equal(`${mockLat}`);
+          expect($('.data-item-long')[$('.data-item-long').length - 1].children[0].data).to.equal(`${mockLong}`);
           return callback();
         });
       }

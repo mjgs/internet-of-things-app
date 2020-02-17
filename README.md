@@ -4,6 +4,8 @@
 
 A company has a number of drones flying around the country. You have been tasked to build a system to track the location of every drone in real-time.
 
+![Drones-app Dashboard](https://bitbucket.org/mjgs/drones-app/raw/c15f739302f478a3a67236a89bbe1bf56cf7a3dd/Dashboard.png);
+
 ## Assumptions & System Explanations
 
 ## Installation

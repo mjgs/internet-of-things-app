@@ -32,7 +32,6 @@
 [x]     setup new server for each wss intgration test
 [x]     calculate and display speed
 [x]     non-active device highlighted
-[ ]   device simulation
 [x]   documention
 [x]     description
 [x]     assumptions & system explanations
@@ -40,3 +39,6 @@
 [x]     debugging
 [x]     testing
 [x]   100% code coverage
+[ ]   license information
+[ ]   device simulation
+

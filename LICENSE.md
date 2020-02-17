@@ -1,0 +1,1 @@
+This repository and all the files within it are the property of Mark J. G. Smith. All rights reserved.

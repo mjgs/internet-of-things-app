@@ -2,6 +2,8 @@
   "name": "drones-app",
   "version": "0.0.1",
   "description": "System to track the real-time location of individual drones in a fleet",
+  "author": "Mark Smith",
+  "license": "SEE LICENSE IN LICENSE.md",
   "private": true,
   "scripts": {
     "postinstall": "./bin/npm-scripts/install-bootstrap.sh",

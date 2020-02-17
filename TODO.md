@@ -26,17 +26,17 @@
 [x]   realtime communication API
 [x]     basic websockets server
 [x]     basic websockets server for devices
-[ ]   website dashboard
+[x]   website dashboard
 [x]     basic dashboard showing devices
 [x]     highlightable table items
 [x]     setup new server for each wss intgration test
 [x]     calculate and display speed
 [x]     non-active device highlighted
 [ ]   device simulation
-[ ]   documention
+[x]   documention
 [x]     description
-[ ]     assumptions & system explanations
+[x]     assumptions & system explanations
 [x]     installation
 [x]     debugging
 [x]     testing
-[ ]   100% code coverage
+[x]   100% code coverage

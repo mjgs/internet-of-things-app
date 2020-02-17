@@ -6,7 +6,51 @@ A company has a number of drones flying around the country. You have been tasked
 
 ![Drones-app Dashboard](https://bitbucket.org/mjgs/drones-app/raw/c15f739302f478a3a67236a89bbe1bf56cf7a3dd/Dashboard.png);
 
-## Assumptions & System Explanations
+## Assumptions
+
+Some assumptions were made:
+
+- The devices have tcp/ip connectivity to each other over a mobile network
+- The devices are on a private network for security reasons
+- The app is an ExpressJS server, which also run a websockets server
+
+## System Explanation
+
+Since updates from the devices will happen over a mobile network and in realtime, it is expected that there will be many very small updates sent. Conventional REST/JSON apis need to negotiate the connection for each update and could result in much higher volumes of data being sent, which could be very expensive over time on mobile networks. For this reason the implementation uses a websockets api since this protocol only negotiates connection once at the start, which saves significantly on bandwidth over time.
+
+The devices connect to the websockets server, get assigned a unique identifier, and send geo positioning updates to the server. The server receives the updates, validates the format is as expected, calculates the device speed based on current and previous data set, and saves all this data to a datastore.
+
+When the dashboard page is loaded via the ExpressJS webserver, it fetches the data from the datastore and renders the page, highlighting any devices that have not moved more than 1 meter since the previous device update.
+
+Code structure:
+
+```
+bin                     
+  npm-scripts  - build scripts
+  www          - main entry point that imports and runs app.js
+lib
+  config       - system configuration
+  controllers  - express server controllers used in routes
+  middleware   - express server middleware used in routes
+  routes       - express routes loaded in app.js
+  utils        - business logic used in controllers
+  views        - ejs templates used by express to render html pages
+  app.js       - main app
+test 
+  unit         - unit tests
+  integration  - integration tests
+```
+
+The code base has unit and integration tests and code coverage pretty close to 100%. There are a few branch else conditions that are not exercised because the code flow does not require these branches.
+
+```
+=============================== Coverage summary ===============================
+Statements   : 100% ( 201/201 )
+Branches     : 93.33% ( 56/60 )
+Functions    : 100% ( 17/17 )
+Lines        : 100% ( 184/184 )
+================================================================================
+```
 
 ## Installation
 

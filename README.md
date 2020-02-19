@@ -4,7 +4,7 @@
 
 This project is minimumal example of an Internet of Things (IOT) application. The scenario is one where there are devices that are geographically distributed and are moving, so could be delivery or perhaps passenger vehicles. The application receives data updates from devices, proceses the data and then displays the data. In this specific example the device speed is calculated. Generally speaking it is a way to collect and process realtime data.
 
-![internet-of-things-app Dashboard](https://bitbucket.org/mjgs/internet-of-things-demo-app/raw/c15f739302f478a3a67236a89bbe1bf56cf7a3dd/Dashboard.png);
+![internet-of-things-app Dashboard](https://bitbucket.org/mjgs/internet-of-things-app/raw/c15f739302f478a3a67236a89bbe1bf56cf7a3dd/Dashboard.png);
 
 ## Assumptions
 

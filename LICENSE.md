@@ -1,79 +1,21 @@
-This repository and all the files within it are the property of Mark J. G. Smith. All rights reserved.
-.
-├── Dashboard.png
-├── Dockerfile
-├── LICENSE.md
-├── README.md
-├── TODO.md
-├── bin
-│   ├── npm-scripts
-│   │   └── install-bootstrap.sh
-│   └── www
-├── lib
-│   ├── app.js
-│   ├── config
-│   │   ├── index.js
-│   │   └── server.js
-│   ├── controllers
-│   │   ├── dashboard.js
-│   │   └── index.js
-│   ├── middleware
-│   │   ├── index.js
-│   │   ├── logRequest.js
-│   │   └── throwError.js
-│   ├── routes
-│   │   ├── dashboard.js
-│   │   ├── index.js
-│   │   └── throwError.js
-│   ├── utils
-│   │   ├── calculateSpeed.js
-│   │   ├── createWebsocketsServer.js
-│   │   ├── dataStore.js
-│   │   ├── getRequestInfo.js
-│   │   ├── highlightRow.js
-│   │   ├── index.js
-│   │   ├── validateUuidData.js
-│   │   └── verifyMiddlewareParams.js
-│   └── views
-│       ├── error.ejs
-│       └── index.ejs
-├── package-lock.json
-├── package.json
-├── public
-│   ├── images
-│   ├── javascripts
-│   │   ├── bootstrap.bundle.min.js
-│   │   ├── bootstrap.bundle.min.js.map
-│   │   ├── bootstrap.min.js
-│   │   ├── bootstrap.min.js.map
-│   │   └── jquery.min.js
-│   └── stylesheets
-│       ├── bootstrap-grid.min.css
-│       ├── bootstrap-grid.min.css.map
-│       ├── bootstrap-reboot.min.css
-│       ├── bootstrap-reboot.min.css.map
-│       ├── bootstrap.min.css
-│       ├── bootstrap.min.css.map
-│       └── style.css
-└── test
-    ├── integration
-    │   ├── httpServer
-    │   │   ├── dashboard.test.js
-    │   │   └── index.test.js
-    │   ├── index.test.js
-    │   └── wsServer
-    │       └── index.test.js
-    └── unit
-        ├── controllers
-        │   └── dashboard.test.js
-        ├── index.test.js
-        ├── middleware
-        │   ├── logRequest.test.js
-        │   └── throwError.test.js
-        └── utils
-            ├── calculateSpeed.test.js
-            ├── createWebsocketsServer.test.js
-            ├── getRequestInfo.test.js
-            ├── highlightRow.test.js
-            ├── validateUuidData.test.js
-            └── verifyMiddlewareParams.test.js
+MIT License
+
+Copyright (c) 2020 Mark J. G. Smith
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

@@ -1,8 +1,8 @@
 {
   "name": "internet-of-things-app",
   "version": "0.0.1",
-  "description": "System to track the real-time location of individual drones in a fleet",
-  "author": "Mark Smith",
+  "description": "System to track the real-time location of devices in an iot fleet",
+  "author": "Mark J. G. Smith",
   "license": "SEE LICENSE IN LICENSE.md",
   "private": true,
   "scripts": {

@@ -1,7 +1,7 @@
 {
   "name": "internet-of-things-app",
   "version": "0.0.1",
-  "description": "System to track the real-time location of devices in an iot fleet",
+  "description": "System to collect and process realtime data of devices in an iot fleet",
   "author": "Mark J. G. Smith",
   "license": "MIT",
   "private": true,

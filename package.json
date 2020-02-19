@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "System to track the real-time location of devices in an iot fleet",
   "author": "Mark J. G. Smith",
-  "license": "SEE LICENSE IN LICENSE.md",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "postinstall": "./bin/npm-scripts/install-bootstrap.sh",

@@ -165,6 +165,10 @@ Then in vscode:
 
 You should also be able to debug the tests, just make sure to set the breakpoint near the start of the test file.
 
+## Improvements
+
+- Better device simulation - use a job scheduler rather than manually running code in browser console 
+
 ## Testing
 
 To run all the test suites:

@@ -1,4 +1,4 @@
-# drones-app
+# internet-of-things-app
 
 ## Description
 

@@ -2,9 +2,9 @@
 
 ## Description
 
-A company has a number of drones flying around the country. You have been tasked to build a system to track the location of every drone in real-time.
+This project is minimumal example of an Internet of Things (IOT) application. THe scenario is one where there are devices that are geographically distributed and are moving, so could be delivery or perhaps passenger vehicles. The application received data updates from devices, proceses the data and then displays the data. In this specific example the device speed is calculated. Generally speaking it is a way to collect and process realtime data.
 
-![Drones-app Dashboard](https://bitbucket.org/mjgs/drones-app/raw/c15f739302f478a3a67236a89bbe1bf56cf7a3dd/Dashboard.png);
+![internet-of-things-app Dashboard](https://bitbucket.org/mjgs/internet-of-things-demo-app/raw/c15f739302f478a3a67236a89bbe1bf56cf7a3dd/Dashboard.png);
 
 ## Assumptions
 

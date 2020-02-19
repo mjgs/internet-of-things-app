@@ -39,6 +39,6 @@
 [x]     debugging
 [x]     testing
 [x]   100% code coverage
-[ ]   license information
+[x]   license information
 [ ]   device simulation
 

@@ -32,7 +32,7 @@
 - [x]   website dashboard
 - [x]     basic dashboard showing devices
 - [x]     highlightable table items
-- [x]     setup new server for each wss intgration test
+- [x]     setup new server for each wss integration test
 - [x]     calculate and display speed
 - [x]     non-active device highlighted
 - [x]   documention

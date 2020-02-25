@@ -13,6 +13,7 @@ Some assumptions were made:
 - The devices have tcp/ip connectivity to each other over a mobile network
 - The devices are on a private network for security reasons
 - The app is an ExpressJS server, which also run a websockets server
+- The devices send updates every 10 seconds
 
 ## System Explanation
 

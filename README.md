@@ -2,9 +2,9 @@
 
 ## Description
 
-This project is minimumal example of an Internet of Things (IOT) application. The scenario is one where there are devices that are geographically distributed and are moving, so could be delivery or perhaps passenger vehicles. The application receives data updates from devices, proceses the data and then displays the data. In this specific example the device speed is calculated. Generally speaking it is a way to collect and process realtime data.
+This project is minimal example of an Internet of Things (IOT) application. The scenario is one where there are devices that are geographically distributed and are moving, so could be delivery or perhaps passenger vehicles. The application receives data updates from devices, proceses the data and then displays the data. In this specific example the device speed is calculated. Generally speaking it is a way to collect and process realtime data.
 
-![internet-of-things-app Dashboard](https://bitbucket.org/mjgs/internet-of-things-app/raw/c15f739302f478a3a67236a89bbe1bf56cf7a3dd/Dashboard.png);
+![internet-of-things-app Dashboard](https://i.postimg.cc/rsKJp1SN/Dashboard.png);
 
 ## Assumptions
 
@@ -13,6 +13,7 @@ Some assumptions were made:
 - The devices have tcp/ip connectivity to each other over a mobile network
 - The devices are on a private network for security reasons
 - The app is an ExpressJS server, which also run a websockets server
+- The devices send updates every 10 seconds
 
 ## System Explanation
 
@@ -119,6 +120,8 @@ lat = '51.1234';
 long = '56.1234';
 socket.send(`uuid:${uuid}:${lat}:${long}`);
 ```
+
+Repeat this two step process in a new browser tab to add additional devices.
 
 ## Debugging
 

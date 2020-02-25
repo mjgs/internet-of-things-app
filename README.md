@@ -121,6 +121,8 @@ long = '56.1234';
 socket.send(`uuid:${uuid}:${lat}:${long}`);
 ```
 
+Repeat this two step process in a new browser tab to add additional devices.
+
 ## Debugging
 
 The app uses the [debug](https://github.com/visionmedia/debug) module, with debug namespace set to file path.

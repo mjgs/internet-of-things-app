@@ -129,7 +129,7 @@ The app uses the [debug](https://github.com/visionmedia/debug) module, with debu
 To enable debug logging in all app files and all test files:
 
 ```
-DEBUG=lib:*,test:*
+DEBUG=bin:*,lib:*,test:*
 ```
 
 To run the code in vscode debugger in the root of the project:

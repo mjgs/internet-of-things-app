@@ -34,7 +34,7 @@
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "socket.io": "^2.3.0",
-    "validator": "^12.2.0",
+    "validator": "^13.7.0",
     "ws": "^7.2.1"
   },
   "devDependencies": {

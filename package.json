@@ -38,7 +38,7 @@
     "ws": "^7.2.1"
   },
   "devDependencies": {
-    "async": "^3.1.1",
+    "async": "^3.2.2",
     "chai": "^4.2.0",
     "chance": "^1.1.4",
     "cheerio": "^1.0.0-rc.3",
